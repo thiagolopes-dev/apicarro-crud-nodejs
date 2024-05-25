@@ -8,5 +8,6 @@ router.get('/carros', CarroController.buscarTodos);
 router.get('/carros/:codigo', CarroController.buscarPorID);
 router.post('/carro', CarroController.inserir);
 router.put('/carro/:codigo', CarroController.alterar);
+router.delete('/carro/:codigo', CarroController.excluir);
 
 module.exports = router;
