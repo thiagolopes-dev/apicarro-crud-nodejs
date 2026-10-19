@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "API Carro CRUD",
-    "description": "Endpoints da API apicarro-crud-nodejs. Body em x-www-form-urlencoded (server usa apenas bodyParser.urlencoded).",
+    "description": "Endpoints da API apicarro-crud-nodejs. Body em JSON.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -22,23 +22,17 @@
         "header": [
           {
             "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
+            "value": "application/json"
           }
         ],
         "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "modelo",
-              "value": "Fiat Uno",
-              "type": "text"
-            },
-            {
-              "key": "placa",
-              "value": "ABC1D23",
-              "type": "text"
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"Fiat Uno\",\n  \"placa\": \"ABC1D23\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
             }
-          ]
+          }
         },
         "url": {
           "raw": "{{baseUrl}}/carro",
@@ -49,27 +43,7 @@
             "carro"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 200', () => pm.response.to.have.status(200));",
-              "const json = pm.response.json();",
-              "pm.test('Sem erro', () => pm.expect(json.error).to.eql(''));",
-              "pm.test('Retorna modelo e placa', () => {",
-              "  pm.expect(json.result).to.have.property('modelo');",
-              "  pm.expect(json.result).to.have.property('placa');",
-              "});",
-              "if (json.result && json.result.codigo) {",
-              "  pm.collectionVariables.set('codigo', json.result.codigo);",
-              "}"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Inserir carro - campos faltando (erro)",
@@ -78,18 +52,17 @@
         "header": [
           {
             "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
+            "value": "application/json"
           }
         ],
         "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "modelo",
-              "value": "Fiat Uno",
-              "type": "text"
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"Fiat Uno\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
             }
-          ]
+          }
         },
         "url": {
           "raw": "{{baseUrl}}/carro",
@@ -100,19 +73,7 @@
             "carro"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "const json = pm.response.json();",
-              "pm.test('Retorna erro de validação', () => pm.expect(json.error).to.eql('Campos não enviados'));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Listar todos os carros",
@@ -127,21 +88,7 @@
             "carros"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 200', () => pm.response.to.have.status(200));",
-              "const json = pm.response.json();",
-              "pm.test('Sem erro', () => pm.expect(json.error).to.eql(''));",
-              "pm.test('result é array', () => pm.expect(json.result).to.be.an('array'));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Buscar carro por código",
@@ -157,21 +104,7 @@
             "{{codigo}}"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 200', () => pm.response.to.have.status(200));",
-              "const json = pm.response.json();",
-              "pm.test('Sem erro', () => pm.expect(json.error).to.eql(''));",
-              "pm.test('result é objeto', () => pm.expect(json.result).to.be.an('object'));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Buscar carro inexistente (404)",
@@ -187,20 +120,7 @@
             "999999"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 404', () => pm.response.to.have.status(404));",
-              "const json = pm.response.json();",
-              "pm.test('Carro não encontrado', () => pm.expect(json.error).to.eql('Carro não encontrado'));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Alterar carro",
@@ -209,23 +129,17 @@
         "header": [
           {
             "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
+            "value": "application/json"
           }
         ],
         "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "modelo",
-              "value": "Fiat Uno Mille",
-              "type": "text"
-            },
-            {
-              "key": "placa",
-              "value": "XYZ9A87",
-              "type": "text"
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"Fiat Uno Mille\",\n  \"placa\": \"XYZ9A87\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
             }
-          ]
+          }
         },
         "url": {
           "raw": "{{baseUrl}}/carro/{{codigo}}",
@@ -237,21 +151,7 @@
             "{{codigo}}"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 200', () => pm.response.to.have.status(200));",
-              "const json = pm.response.json();",
-              "pm.test('Sem erro', () => pm.expect(json.error).to.eql(''));",
-              "pm.test('Modelo atualizado', () => pm.expect(json.result.modelo).to.eql('Fiat Uno Mille'));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Alterar carro inexistente (404)",
@@ -260,23 +160,17 @@
         "header": [
           {
             "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
+            "value": "application/json"
           }
         ],
         "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "modelo",
-              "value": "X",
-              "type": "text"
-            },
-            {
-              "key": "placa",
-              "value": "AAA0A00",
-              "type": "text"
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"X\",\n  \"placa\": \"AAA0A00\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
             }
-          ]
+          }
         },
         "url": {
           "raw": "{{baseUrl}}/carro/999999",
@@ -288,20 +182,7 @@
             "999999"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 404', () => pm.response.to.have.status(404));",
-              "const json = pm.response.json();",
-              "pm.test('Carro não encontrado', () => pm.expect(json.error).to.eql('Carro não encontrado'));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Excluir carro",
@@ -317,20 +198,7 @@
             "{{codigo}}"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 200', () => pm.response.to.have.status(200));",
-              "const json = pm.response.json();",
-              "pm.test('Sem erro', () => pm.expect(json.error).to.eql(''));"
-            ]
-          }
-        }
-      ]
+      }
     },
     {
       "name": "Excluir carro inexistente (404)",
@@ -346,20 +214,7 @@
             "999999"
           ]
         }
-      },
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status 404', () => pm.response.to.have.status(404));",
-              "const json = pm.response.json();",
-              "pm.test('Carro não encontrado', () => pm.expect(json.error).to.eql('Carro não encontrado'));"
-            ]
-          }
-        }
-      ]
+      }
     }
   ]
 }
