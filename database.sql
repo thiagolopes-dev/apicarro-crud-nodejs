@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS apicarros;
+USE apicarros;
+
+CREATE TABLE IF NOT EXISTS carros (
+  codigo INT NOT NULL AUTO_INCREMENT,
+  modelo VARCHAR(100) NOT NULL,
+  placa VARCHAR(10) NOT NULL,
+  PRIMARY KEY (codigo)
+);

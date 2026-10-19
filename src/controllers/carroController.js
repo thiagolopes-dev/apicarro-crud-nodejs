@@ -10,7 +10,8 @@ module.exports = {
       for (let i in carros) {
         json.result.push({
           codigo: carros[i].codigo,
-          descricao: carros[i].modelo,
+          modelo: carros[i].modelo,
+          placa: carros[i].placa,
         });
       }
     } catch (error) {
@@ -47,6 +48,11 @@ module.exports = {
     let modelo = req.body.modelo; //para pegar o parametro
     let placa = req.body.placa;
 
+    if ((modelo && typeof modelo !== "string") || (placa && typeof placa !== "string")) {
+      json.error = "Campos inválidos";
+      return res.status(400).json(json);
+    }
+
     if (modelo && placa) {
       try {
         let carroCodigo = await CarroService.inserir(modelo, placa);
@@ -71,6 +77,11 @@ module.exports = {
     let codigo = req.params.codigo;
     let modelo = req.body.modelo;
     let placa = req.body.placa;
+
+    if ((modelo && typeof modelo !== 'string') || (placa && typeof placa !== 'string')){
+        json.error = 'Campos inválidos';
+        return res.status(400).json(json);
+    }
 
     if (codigo && modelo && placa){
         try {
