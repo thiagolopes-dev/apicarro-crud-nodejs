@@ -33,7 +33,7 @@ inserir: (modelo, placa)=> {
           [modelo, placa],
           (error, results)=>{
               if(error){ rejeitado(error); return; }
-              aceito(results.insertCodigo); //insertId
+              aceito(results.insertId);
           }
       );
   });
