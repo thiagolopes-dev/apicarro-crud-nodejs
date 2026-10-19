@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const CarroController = require('./controllers/CarroController');
+const CarroController = require('./controllers/carroController');
 
 router.get('/carros', CarroController.buscarTodos);
 router.get('/carros/:codigo', CarroController.buscarPorID);

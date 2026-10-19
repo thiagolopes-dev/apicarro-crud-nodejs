@@ -1,0 +1,220 @@
+{
+  "info": {
+    "name": "API Carro CRUD",
+    "description": "Endpoints da API apicarro-crud-nodejs. Body em JSON.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "codigo",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Inserir carro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"Fiat Uno\",\n  \"placa\": \"ABC1D23\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/carro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carro"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Inserir carro - campos faltando (erro)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"Fiat Uno\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/carro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carro"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar todos os carros",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/carros",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carros"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Buscar carro por código",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/carros/{{codigo}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carros",
+            "{{codigo}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Buscar carro inexistente (404)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/carros/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carros",
+            "999999"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Alterar carro",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"Fiat Uno Mille\",\n  \"placa\": \"XYZ9A87\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/carro/{{codigo}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carro",
+            "{{codigo}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Alterar carro inexistente (404)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"modelo\": \"X\",\n  \"placa\": \"AAA0A00\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/carro/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carro",
+            "999999"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Excluir carro",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/carro/{{codigo}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carro",
+            "{{codigo}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Excluir carro inexistente (404)",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/carro/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "carro",
+            "999999"
+          ]
+        }
+      }
+    }
+  ]
+}
